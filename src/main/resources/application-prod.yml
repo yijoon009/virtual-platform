@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://ec2-3-37-191-45.ap-northeast-2.compute.amazonaws.com:3306/mysql
+    username: root
+    password: root
+
+  #JPA
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect:
+        format_sql: false
+        use_sql_comments: false # querydsl로 실행되는 쿼리 조회 가능
+        show_sql: false
+#        show_sql: true
+#        default_batch_fetch_size: 100 # 추후 size 변경
+
+server:
+  port: 8080
+
+file:
+  upload:
+    url: /data
