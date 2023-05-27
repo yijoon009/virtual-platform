@@ -40,6 +40,9 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java:8.0.26'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	// 쿼리 로그 보기
+	implementation 'p6spy:p6spy-spring-boot-starter:5.1.1'
+
 	//테스트에서 lombok 사용
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'

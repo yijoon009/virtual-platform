@@ -4,6 +4,7 @@ spring:
     url: jdbc:mysql://ec2-3-37-191-45.ap-northeast-2.compute.amazonaws.com:3306/mysql
     username: root
     password: root
+    p6spy: true
 
   #JPA
   jpa:
