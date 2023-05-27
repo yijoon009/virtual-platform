@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://ec2-3-37-191-45.ap-northeast-2.compute.amazonaws.com:3306/mysql
+    url: jdbc:mysql://ec2-3-37-191-45.ap-northeast-2.compute.amazonaws.com:3306/MEETUPDB
     username: root
     password: root
 
