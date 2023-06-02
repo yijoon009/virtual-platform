@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "TEST_TABLE", schema = "MEETUPDB")
-public class TestTable {
+public class TestDataTable {
 
     @Id @GeneratedValue
     private Long id;

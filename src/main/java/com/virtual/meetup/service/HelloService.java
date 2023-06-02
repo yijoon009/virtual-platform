@@ -1,7 +1,7 @@
 package com.virtual.meetup.service;
 
 
-import com.virtual.meetup.entity.TestTable;
+import com.virtual.meetup.entity.TestDataTable;
 import com.virtual.meetup.repository.HelloRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class HelloService {
 
     private final HelloRepository helloRepository;
 
-    public TestTable findAll() {
+    public TestDataTable findAll() {
         return helloRepository.findAll().get(0);
     }
 
