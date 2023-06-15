@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class HelloController {
 
-    final HelloRepository helloRepository;
+    private final HelloRepository helloRepository;
 
     @GetMapping("hello")
     public String hello() {
