@@ -18,7 +18,7 @@ public class HelloController {
     public String hello() {
         HelloEntity entity = helloRepository.findAll().get(0);
         log.info("entity={}", entity);
-        return "hello. world";
+        return "hello. world 2";
     }
 
 }
