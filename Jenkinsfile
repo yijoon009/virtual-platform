@@ -36,10 +36,21 @@ pipeline {
         // 단계: AWS Elastic Beanstalk 초기화
         stage('Initialize EB CLI') {
             steps {
-                // EB CLI 초기화
-                sh 'eb init --region $AWS_REGION'
+                withCredentials([
+                    [
+                        $class: 'AmazonWebServicesCredentialsBinding',
+//                         credentialsId: 'aws-credentials',  // Jenkins의 자격 증명 ID
+                        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                    ]
+                ]) {
+                    sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile my-profile'
+                    sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile my-profile'
+                    sh 'eb init --region ap-northeast-2 --profile my-profile'
+                }
             }
         }
+
 
         // 단계: AWS Elastic Beanstalk으로 배포
         stage('Deploy to AWS Elastic Beanstalk') {
