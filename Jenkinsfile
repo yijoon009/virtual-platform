@@ -39,7 +39,7 @@ pipeline {
                 withCredentials([
                     [
                         $class: 'AmazonWebServicesCredentialsBinding',
-                        credentialsId: '',  // Jenkins의 자격 증명 ID
+                        credentialsId: 'my-aws-credentials',  // Jenkins의 자격 증명 ID
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                     ]
