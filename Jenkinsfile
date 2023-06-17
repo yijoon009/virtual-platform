@@ -13,7 +13,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // 소스 코드를 Git 리포지토리에서 체크아웃
-                git 'https://github.com/yijoon009/virtual-platform'
+                git branch: 'main', url: 'https://github.com/yijoon009/virtual-platform'
             }
         }
 
