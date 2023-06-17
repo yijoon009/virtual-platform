@@ -29,7 +29,15 @@ pipeline {
         stage('Test') {
             steps {
                 // Gradle을 사용하여 테스트 실행
-	                sh 'gradle test'
+                sh 'gradle test'
+            }
+        }
+
+        // 단계: AWS Elastic Beanstalk 초기화
+        stage('Initialize EB CLI') {
+            steps {
+                // EB CLI 초기화
+                sh 'eb init --region $AWS_REGION'
             }
         }
 
