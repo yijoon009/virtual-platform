@@ -12,18 +12,8 @@ pipeline {
         // 단계: 소스 코드 체크아웃
         stage('Checkout') {
             steps {
-                // AWS CodeCommit 소스 제어 설정
-                withCredentials([string(credentialsId: 'BackEnd-AWS-CodeCommit', variable: 'AWS_CODECOMMIT_CREDENTIALS')]) {
-                    sh '''
-                        git config --global credential.helper '!aws --profile jenkins codecommit credential-helper $@'
-                        git config --global credential.UseHttpPath true
-                        git clone https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/virtual-platform
-                    '''
-                }
-                dir('virtual-platform') {
-                    // Git 리포지토리에서 소스 코드 체크아웃
-                    git branch: 'main', url: 'https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/virtual-platform'
-                }
+                // 소스 코드를 Git 리포지토리에서 체크아웃
+                git branch: 'main', url: 'https://github.com/yijoon009/virtual-platform/'
             }
         }
 
@@ -46,7 +36,7 @@ pipeline {
         // 단계: AWS Elastic Beanstalk 초기화
         stage('Initialize EB CLI') {
             steps {
-                // AWS Elastic Beanstalk CLI 초기화
+                // EB CLI 초기화
                 sh 'eb init --region $AWS_REGION'
             }
         }
@@ -54,10 +44,12 @@ pipeline {
         // 단계: AWS Elastic Beanstalk으로 배포
         stage('Deploy to AWS Elastic Beanstalk') {
             steps {
-                // 배포 스크립트에 실행 권한 부여
-                sh 'chmod +x deploy.sh'
-                // 배포 스크립트 실행
-                sh './deploy.sh'
+                script {
+                    // 배포 스크립트에 실행 권한 부여
+                    sh 'chmod +x deploy.sh'
+                    // 배포 스크립트 실행
+                    sh './deploy.sh'
+                }
             }
         }
 
