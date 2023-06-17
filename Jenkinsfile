@@ -4,8 +4,6 @@ pipeline {
     // AWS 리전과 액세스 키 설정
     environment {
         AWS_REGION = 'ap-northeast-2'
-        AWS_ACCESS_KEY_ID = credentials('BackEnd-AWS-ElasticBeanstalk') // AWS 액세스 키 ID (내 AWS IAM 계정정보)
-        AWS_SECRET_ACCESS_KEY = credentials('BackEnd-AWS-ElasticBeanstalk-SecretKey') // 비밀 액세스 키 (IAM 계정 액세스 키 정보)
     }
 
     stages {
@@ -37,7 +35,15 @@ pipeline {
         stage('Initialize EB CLI') {
             steps {
                 // EB CLI 초기화
-                sh 'eb init --region $AWS_REGION'
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'BackEnd-AWS-ElasticBeanstalk',
+                        usernameVariable: 'AWS_ACCESS_KEY_ID',
+                        passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+                    )
+                ]) {
+                    sh 'eb init --region $AWS_REGION'
+                }
             }
         }
 
