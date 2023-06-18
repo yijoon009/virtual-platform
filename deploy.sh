@@ -9,8 +9,8 @@ EB_ENVIRONMENT="meetup-spring-boot"
 # Version label
 VERSION_LABEL=$(date +%Y%m%d%H%M%S)
 
-# Create a New Application Version in AWS Elastic Beanstalk
-eb create $EB_ENVIRONMENT --version $VERSION_LABEL
-
-# Update the Environment to the New Application Version
+# Set the default environment
 eb use $EB_ENVIRONMENT
+
+# Create a New Application Version in AWS Elastic Beanstalk
+eb deploy --version $VERSION_LABEL
