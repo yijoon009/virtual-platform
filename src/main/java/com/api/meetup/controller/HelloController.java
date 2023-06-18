@@ -21,4 +21,9 @@ public class HelloController {
         return "hello. world 2";
     }
 
+    @GetMapping("Test")
+    public String testCode() {
+        return "hello this is TEST";
+    }
+
 }
