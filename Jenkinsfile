@@ -4,6 +4,8 @@ pipeline {
     // AWS 리전과 액세스 키 설정
     environment {
         AWS_REGION = 'ap-northeast-2'
+        AWS_ACCESS_KEY_ID = credentials('BackEnd-AWS-ElasticBeanstalk')
+        AWS_SECRET_ACCESS_KEY = credentials('BackEnd-AWS-ElasticBeanstalk-Secret')
     }
 
     stages {
@@ -34,14 +36,7 @@ pipeline {
        // 단계: AWS Elastic Beanstalk 초기화
        stage('Initialize EB CLI') {
            steps {
-               withCredentials([
-                   [$class: 'AmazonWebServicesCredentialsBinding',
-                   credentialsId: 'BackEnd-AWS-ElasticBeanstalk',
-                   accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                   secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']
-               ]) {
-                   sh 'echo -e "N\n\n\n" | eb init meetup-spring-boot --region ap-northeast-2'
-               }
+               sh 'echo -e "N\n\n\n" | eb init meetup-spring-boot --region ap-northeast-2'
            }
        }
 
