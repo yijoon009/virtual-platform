@@ -7,7 +7,7 @@ EB_APPLICATION="meetup-spring-boot"
 EB_ENVIRONMENT="meetup-spring-boot"
 
 # Version label
-VERSION_LABEL=$(date +%Y%m%d%H%M%S)
+VERSION_LABEL="v0.1-1"
 
 # Set the default environment
 eb use $EB_ENVIRONMENT
