@@ -4,8 +4,8 @@ pipeline {
     // AWS 리전과 액세스 키 설정
     environment {
         AWS_REGION = 'ap-northeast-2'
-        AWS_ACCESS_KEY_ID = credentials('BackEnd-AWS-ElasticBeanstalk') // AWS 액세스 키 ID (내 AWS IAM 계정정보)
-        AWS_SECRET_ACCESS_KEY = credentials('BackEnd-AWS-ElasticBeanstalk-SecretKey') // 비밀 액세스 키 (IAM 계정 액세스 키 정보)
+//         AWS_ACCESS_KEY_ID = credentials('BackEnd-AWS-ElasticBeanstalk') // AWS 액세스 키 ID (내 AWS IAM 계정정보)
+//         AWS_SECRET_ACCESS_KEY = credentials('BackEnd-AWS-ElasticBeanstalk-SecretKey') // 비밀 액세스 키 (IAM 계정 액세스 키 정보)
     }
 
     stages {
@@ -33,23 +33,18 @@ pipeline {
             }
         }
 
-        // 단계: AWS Elastic Beanstalk 초기화
-        stage('Initialize EB CLI') {
-            steps {
-                withCredentials([
-                    [
-                        $class: 'AmazonWebServicesCredentialsBinding',
-                        credentialsId: 'my-aws-credentials',  // Jenkins의 자격 증명 ID
-                        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-                    ]
-                ]) {
-                    sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile my-profile'
-                    sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile my-profile'
-                    sh 'eb init --region ap-northeast-2 --profile my-profile'
-                }
-            }
-        }
+       // 단계: AWS Elastic Beanstalk 초기화
+       stage('Initialize EB CLI') {
+           steps {
+               withCredentials([[
+                   $class: 'AmazonWebServicesCredentialsBinding',
+                   credentialsId: 'BackEnd-AWS-ElasticBeanstalk'  // Jenkins의 자격 증명 ID
+               ]]) {
+                   sh 'eb init --region ap-northeast-2'
+               }
+           }
+       }
+
 
 
         // 단계: AWS Elastic Beanstalk으로 배포
