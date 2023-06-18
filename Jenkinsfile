@@ -40,7 +40,7 @@ pipeline {
                    $class: 'AmazonWebServicesCredentialsBinding',
                    credentialsId: 'BackEnd-AWS-ElasticBeanstalk'  // Jenkins의 자격 증명 ID
                ]]) {
-                   sh 'eb init meetup-spring-boot --region ap-northeast-2 --no-interactive'
+                   sh 'echo -e "\n\n" | eb init meetup-spring-boot --region ap-northeast-2'
                }
            }
        }
