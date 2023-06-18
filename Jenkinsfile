@@ -36,16 +36,16 @@ pipeline {
        // 단계: AWS Elastic Beanstalk 초기화
        stage('Initialize EB CLI') {
            steps {
-               withCredentials([[
-                   $class: 'AmazonWebServicesCredentialsBinding',
-                   credentialsId: 'BackEnd-AWS-ElasticBeanstalk'  // Jenkins의 자격 증명 ID
-               ]]) {
+               withCredentials([
+                   [$class: 'AmazonWebServicesCredentialsBinding',
+                   credentialsId: 'BackEnd-AWS-ElasticBeanstalk',  // Jenkins의 자격 증명 ID
+                   accessKeyVariable: 'AWS_ACCESS_KEY_ID',  // 환경 변수 이름 지정
+                   secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']  // 환경 변수 이름 지정
+               ]) {
                    sh 'echo -e "N\n\n\n" | eb init meetup-spring-boot --region ap-northeast-2'
                }
            }
        }
-
-
 
         // 단계: AWS Elastic Beanstalk으로 배포
         stage('Deploy to AWS Elastic Beanstalk') {
